@@ -1,0 +1,95 @@
+Functions (add, subtract, multiply, divide):
+
+Each function performs a basic arithmetic operation and returns the result.
+User Input and Output:
+
+The program prompts the user to enter two numbers and an operator.
+It then performs the corresponding arithmetic operation and prints the result.
+Error Handling:
+
+The division function checks for division by zero and prints an error message if encountered.
+Switch Statement:
+
+The program uses a switch statement to determine which arithmetic operation to perform based on the entered operator.
+Code Modularity:
+
+The project demonstrates the use of functions to achieve code modularity, making it easier to understand and maintain.
+
+
+
+Let's walk through the code step by step:
+
+c
+Copy code
+#include <stdio.h>
+This line includes the standard input-output library, which provides functions like printf and scanf.
+
+c
+Copy code
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        printf("Error: Division by zero!\n");
+        return 0.0;
+    }
+}
+Here, four functions are defined: add, subtract, multiply, and divide. Each function takes two double parameters and returns the result of the corresponding arithmetic operation. The divide function includes a check to avoid division by zero, printing an error message if the denominator is zero.
+
+c
+Copy code
+int main() {
+    double num1, num2;
+    char operator;
+
+    printf("Enter first number: ");
+    scanf("%lf", &num1);
+
+    printf("Enter operator (+, -, *, /): ");
+    scanf(" %c", &operator);
+
+    printf("Enter second number: ");
+    scanf("%lf", &num2);
+In the main function, variables num1, num2, and operator are declared. The user is prompted to enter the first number, an operator, and the second number using scanf.
+
+Note: The space before %c in the scanf for the operator is used to consume the newline character left in the input buffer by the previous scanf.
+
+c
+Copy code
+    switch (operator) {
+        case '+':
+            printf("Result: %.2lf\n", add(num1, num2));
+            break;
+        case '-':
+            printf("Result: %.2lf\n", subtract(num1, num2));
+            break;
+        case '*':
+            printf("Result: %.2lf\n", multiply(num1, num2));
+            break;
+        case '/':
+            printf("Result: %.2lf\n", divide(num1, num2));
+            break;
+        default:
+            printf("Error: Invalid operator\n");
+    }
+The switch statement checks the value of the operator and executes the corresponding case. It calls the appropriate function (add, subtract, multiply, or divide) with the entered numbers and prints the result. If an invalid operator is entered, an error message is displayed.
+
+c
+Copy code
+    return 0;
+}
+The main function ends with return 0;, indicating successful program execution. In C, a return value of 0 conventionally signifies that the program terminated without errors.
+
+This small C project demonstrates the use of functions, user input/output, conditional statements (switch), and basic error handling. It's designed to showcase your understanding of fundamental C programming concepts during an interview.
