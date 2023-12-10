@@ -1,0 +1,279 @@
+This project involves creating a simple task manager where users can add tasks, view tasks, and mark tasks as completed. It's designed to demonstrate basic programming concepts, including data structures and user interaction.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Define the maximum number of tasks
+#define MAX_TASKS 10
+
+// Structure to represent a task
+typedef struct {
+    char description[50];
+    int completed;
+} Task;
+
+// Function to add a new task
+void addTask(Task tasks[], int *taskCount, const char *description) {
+    if (*taskCount < MAX_TASKS) {
+        Task newTask;
+        strcpy(newTask.description, description);
+        newTask.completed = 0; // Set as incomplete by default
+        tasks[*taskCount] = newTask;
+        (*taskCount)++;
+        printf("Task added successfully!\n");
+    } else {
+        printf("Task limit reached. Cannot add more tasks.\n");
+    }
+}
+
+// Function to view all tasks
+void viewTasks(const Task tasks[], int taskCount) {
+    if (taskCount > 0) {
+        printf("Tasks:\n");
+        for (int i = 0; i < taskCount; i++) {
+            printf("%d. %s - %s\n", i + 1, tasks[i].description, (tasks[i].completed ? "Completed" : "Incomplete"));
+        }
+    } else {
+        printf("No tasks available.\n");
+    }
+}
+
+// Function to mark a task as completed
+void completeTask(Task tasks[], int taskCount, int taskIndex) {
+    if (taskIndex >= 1 && taskIndex <= taskCount) {
+        tasks[taskIndex - 1].completed = 1;
+        printf("Task marked as completed!\n");
+    } else {
+        printf("Invalid task index.\n");
+    }
+}
+
+int main() {
+    Task tasks[MAX_TASKS];
+    int taskCount = 0;
+    int choice;
+    char description[50];
+
+    do {
+        // Display menu
+        printf("\nTask Manager\n");
+        printf("1. Add Task\n");
+        printf("2. View Tasks\n");
+        printf("3. Mark Task as Completed\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter task description: ");
+                scanf(" %[^\n]", description); // Read the description with spaces
+                addTask(tasks, &taskCount, description);
+                break;
+            case 2:
+                viewTasks(tasks, taskCount);
+                break;
+            case 3:
+                if (taskCount > 0) {
+                    printf("Enter the task index to mark as completed: ");
+                    int taskIndex;
+                    scanf("%d", &taskIndex);
+                    completeTask(tasks, taskCount, taskIndex);
+                } else {
+                    printf("No tasks available to mark as completed.\n");
+                }
+                break;
+            case 4:
+                printf("Exiting Task Manager. Goodbye!\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 4.\n");
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+
+
+This project includes the following key concepts:
+
+Structures (Task): The program uses a structure to represent a task, consisting of a description and a flag indicating whether it's completed.
+
+Functions (addTask, viewTasks, completeTask): Modularized code with functions to add tasks, view tasks, and mark tasks as completed.
+
+Arrays: An array of Task structures is used to store multiple tasks.
+
+User Input: The program interacts with the user through a simple menu, and it reads user input for task descriptions and choices.
+
+Loops (do-while): A do-while loop is used to keep the program running until the user chooses to exit.
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+Header Inclusions:
+#include <stdio.h>: Includes the standard input-output library for functions like printf and scanf.
+#include <stdlib.h>: Includes the standard library for functions like malloc and free.
+#include <string.h>: Includes the string manipulation library for functions like strcpy.
+
+
+#define MAX_TASKS 10
+Preprocessor Directive:
+#define MAX_TASKS 10: Defines a constant MAX_TASKS with a value of 10, representing the maximum number of tasks allowed.
+
+
+
+typedef struct {
+    char description[50];
+    int completed;
+} Task;
+Structure Definition:
+typedef struct {...} Task;: Defines a structure named Task with two members: description (an array of characters) and completed (an integer).
+
+
+
+
+
+void addTask(Task tasks[], int *taskCount, const char *description) {
+    if (*taskCount < MAX_TASKS) {
+        Task newTask;
+        strcpy(newTask.description, description);
+        newTask.completed = 0; // Set as incomplete by default
+        tasks[*taskCount] = newTask;
+        (*taskCount)++;
+        printf("Task added successfully!\n");
+    } else {
+        printf("Task limit reached. Cannot add more tasks.\n");
+    }
+}
+Function to Add a Task:
+void addTask(Task tasks[], int *taskCount, const char *description) { ... }: Declares a function to add a new task to the array.
+if (*taskCount < MAX_TASKS) { ... }: Checks if the task limit has been reached.
+Task newTask;: Creates a new task.
+strcpy(newTask.description, description);: Copies the task description to the new task.
+newTask.completed = 0;: Sets the task as incomplete by default.
+tasks[*taskCount] = newTask;: Adds the new task to the array.
+(*taskCount)++;: Increments the task count.
+printf("Task added successfully!\n");: Prints a success message if the task is added.
+
+
+
+
+void viewTasks(const Task tasks[], int taskCount) {
+    if (taskCount > 0) {
+        printf("Tasks:\n");
+        for (int i = 0; i < taskCount; i++) {
+            printf("%d. %s - %s\n", i + 1, tasks[i].description, (tasks[i].completed ? "Completed" : "Incomplete"));
+        }
+    } else {
+        printf("No tasks available.\n");
+    }
+}
+Function to View Tasks:
+void viewTasks(const Task tasks[], int taskCount) { ... }: Declares a function to display all tasks.
+if (taskCount > 0) { ... }: Checks if there are tasks to display.
+for (int i = 0; i < taskCount; i++) { ... }: Iterates through the tasks and prints their details.
+
+
+
+
+void completeTask(Task tasks[], int taskCount, int taskIndex) {
+    if (taskIndex >= 1 && taskIndex <= taskCount) {
+        tasks[taskIndex - 1].completed = 1;
+        printf("Task marked as completed!\n");
+    } else {
+        printf("Invalid task index.\n");
+    }
+}
+Function to Mark a Task as Completed:
+void completeTask(Task tasks[], int taskCount, int taskIndex) { ... }: Declares a function to mark a task as completed.
+if (taskIndex >= 1 && taskIndex <= taskCount) { ... }: Checks if the task index is valid.
+tasks[taskIndex - 1].completed = 1;: Marks the specified task as completed.
+printf("Task marked as completed!\n");: Prints a success message.
+
+
+
+
+int main() {
+    Task tasks[MAX_TASKS];
+    int taskCount = 0;
+    int choice;
+    char description[50];
+Main Function:
+int main() { ... }: The main function where the program execution begins.
+Task tasks[MAX_TASKS];: Declares an array of tasks to store the tasks.
+int taskCount = 0;: Initializes the task count.
+int choice;: Declares a variable to store the user's menu choice.
+char description[50];: Declares an array to store task descriptions.
+
+
+
+
+
+    do {
+        // Display menu
+        printf("\nTask Manager\n");
+        printf("1. Add Task\n");
+        printf("2. View Tasks\n");
+        printf("3. Mark Task as Completed\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+Menu Display:
+do { ... } while (choice != 4);: Initiates a do-while loop to display the menu and perform actions based on user input.
+Displays a menu with options for adding tasks, viewing tasks, marking tasks as completed, and exiting the program.
+
+
+
+
+        switch (choice) {
+            case 1:
+                printf("Enter task description: ");
+                scanf(" %[^\n]", description); // Read the description with spaces
+                addTask(tasks, &taskCount, description);
+                break;
+            case 2:
+                viewTasks(tasks, taskCount);
+                break;
+            case 3:
+                if (taskCount > 0) {
+                    printf("Enter the task index to mark as completed: ");
+                    int taskIndex;
+                    scanf("%d", &taskIndex);
+                    completeTask(tasks, taskCount, taskIndex);
+                } else {
+                    printf("No tasks available to mark as completed.\n");
+                }
+                break;
+            case 4:
+                printf("Exiting Task Manager. Goodbye!\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 4.\n");
+        }
+Switch Statement:
+switch (choice) { ... }: Uses a switch statement to perform actions based on the user's menu choice.
+Case 1: Adds a new task by calling the addTask function.
+Case 2: Views all tasks by calling the viewTasks function.
+Case 3: Marks a task as completed by calling the completeTask function.
+Case 4: Exits the program.
+
+
+
+
+
+    } while (choice != 4);
+
+    return 0;
+}
+End of Program:
+} while (choice != 4);: The do-while loop continues until the user chooses to exit.
+return 0;: Indicates successful
